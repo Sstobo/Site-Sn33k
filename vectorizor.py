@@ -5,10 +5,10 @@ import openai
 import pinecone
 
 # Set up OpenAI and Pinecone API keys
-OPENAI_API_KEY = "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"
-PINECONE_API_KEY = "b44a07d6-e47f-43c9-a7f8-5a4dc4dfe62c"
-INDEX_NAME = "chatgpt"
-PINECONE_ENVIRONMENT="eu-west1-gcp"
+OPENAI_API_KEY = ""
+PINECONE_API_KEY = ""
+INDEX_NAME = ""
+PINECONE_ENVIRONMENT=""
 
 # Load train.jsonl file
 def load_data(file_path):
