@@ -24,7 +24,8 @@ This Python repository contains a set of scripts that allow you to scrape a webs
 1. Clone the repository and navigate to the project directory.
 2. Install the required Python libraries using `pip install -r requirements.txt`.
 3. Set up your OpenAI and Pinecone API keys.
-4: copy and run the wget command: wget -r -A.html -P rtdocs https://your-website # download the website
+4: copy and run the wget command: 
+  `wget -r -A.html -P rtdocs https://your-website # download the website`
 5. Run `cleaner.py` to download and clean the website data. - This will break down the directory structure into on list of html docs.
 6. Run `chunker.py` to split the text files into smaller chunks. This outputs train.json in the root
 7. Run `vectorizor.py` to create embeddings and index them using Pinecone. This will vectorize train.json
