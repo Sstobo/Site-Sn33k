@@ -1,6 +1,6 @@
 # open vscode through anaconda
 ## pip install bs4
-#  wget -r -A.html -P rtdocs https://your-website # download the website
+#  wget -r -np -nd -A.html,.txt,.tmp -P websites https://your-website # download the website
 # install beautifulsoup4
 # configure path to the directory where the files are stored
 # run the script
@@ -21,8 +21,8 @@ def get_unique_filename(output_file_path):
     return output_file_path
 
 # Define the directory path
-dir_path = "rtdocs"
-output_dir = "rtdocs"
+dir_path = "websites"
+output_dir = "websites"
 
 # Loop through all subdirectories and files in the directory
 for root, dirs, files in os.walk(dir_path, topdown=False):
