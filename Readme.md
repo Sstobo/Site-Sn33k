@@ -24,6 +24,13 @@ THESE FUNCTIONS CONSUME THE FILES THEY PROCESS (only in the websites and pdfs di
 
 ## Usage
 
+![Step 1](data/pdf-1.png)
+![Step 2](data/pdf-2.png)
+![Step 3](data/pdf-3.png)
+![Step 4](data/pdf-4.png)
+![Step 5](data/pdf-5.png)
+![Step 6](data/pdf-6.png)
+
 1. Clone the repository and navigate to the project directory.
 2. Install the required Python libraries using `pip install -r requirements.txt`.
 3. Set up your OpenAI and Pinecone API keys.
