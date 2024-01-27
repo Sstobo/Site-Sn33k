@@ -35,9 +35,13 @@ THESE FUNCTIONS CONSUME THE FILES THEY PROCESS (only in the websites and pdfs di
 2. Install the required Python libraries using `pip install -r requirements.txt`.
 3. Set up your OpenAI and Pinecone API keys.
 4: Download the website - copy and run the wget command: 
-  `wget -r -np -nd -A.html,.txt,.tmp -P websites https://your-website`
+  `wget -r -np -nd -A.html,.txt,.tmp -P websites https://www.linkedin.com/in/sean-stobo/`
 5. Run `python cleaner.py` to download and clean the website data. - This will break down the directory structure into on list of html docs.
+
 6. Run `python chunker.py` to split the text files into smaller chunks. This outputs train.json in the root
+
+6.5. Run 'pdf-muncher.py' to convert the contents of the '/pdfs/' folder to serialized train.jsonl file in root. 
+
 7. Run `python vectorizor.py` to create embeddings and index them using Pinecone. This will vectorize train.json
 
 Note: Before running `vectorizor.py`, make sure to set up a Pinecone database with 1536 dimensions.

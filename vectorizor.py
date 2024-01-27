@@ -3,13 +3,18 @@
 import jsonlines
 import openai
 import pinecone
+import os
+from dotenv import load_dotenv
 
 # Set up OpenAI and Pinecone API keys
-OPENAI_API_KEY = ""
-PINECONE_API_KEY = ""
-INDEX_NAME = ""
-PINECONE_ENVIRONMENT=""
+# Load environment variables from .env file
+load_dotenv()
 
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+INDEX_NAME = os.getenv("INDEX_NAME")
+PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+# Set up OpenAI and Pinecone API keys
 # Load train.jsonl file
 def load_data(file_path):
     data = []
@@ -33,13 +38,29 @@ def init_pinecone(api_key, index_name, dimension):
 # Create embeddings and populate the index
 def create_and_index_embeddings(data, model, index):
     batch_size = 32
-    for i in range(0, len(data), batch_size):
-        text_batch = [item["text"] for item in data[i:i+batch_size]]
-        ids_batch = [str(n) for n in range(i, i+min(batch_size, len(data)-i))]
+    for start_index in range(0, len(data), batch_size):
+        # Correctly use 'pageContent' instead of 'text'
+        text_batch = [item["pageContent"] for item in data[start_index:start_index+batch_size]]
+        # Correct the references for ids_batch based on the new structure
+        ids_batch = [
+            f"{item['metadata']['txtPath'].split('/')[-1]}_{i}"  # Use 'txtPath' from within 'metadata'
+            for i, item in enumerate(data[start_index:start_index+batch_size])
+        ]
         res = openai.Embedding.create(input=text_batch, engine=model)
         embeds = [record["embedding"] for record in res["data"]]
-        to_upsert = zip(ids_batch, embeds)
-        index.upsert(vectors=list(to_upsert))
+        # Update 'to_upsert' with the correct metadata structure
+        to_upsert = [
+            {
+                "id": ids_batch[i],
+                "values": embeds[i],
+                "metadata": {
+                    "txtPath": data[start_index + i]["metadata"]["txtPath"],
+                    "pageContent": text_batch[i]
+                }
+            }
+            for i in range(len(embeds))
+        ]
+        index.upsert(vectors=to_upsert)
 
 if __name__ == "__main__":
     # Load the data from train.jsonl
