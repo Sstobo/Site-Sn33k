@@ -24,12 +24,28 @@ THESE FUNCTIONS CONSUME THE FILES THEY PROCESS (only in the websites and pdfs di
 
 ## Usage
 
+We choose a site to rip
 ![Step 1](data/pdf-1.png)
+
+We see our 'website' folder filling up with files
 ![Step 2](data/pdf-2.png)
+
+We run the cleaner script
 ![Step 3](data/pdf-3.png)
+
+Files are normalized and cleaned up
 ![Step 4](data/pdf-4.png)
+
+Now we run chunker, and we can see our website files are now chunked and vectorized
 ![Step 5](data/pdf-5.png)
-![Step 6](data/pdf-6.png)
+
+Now we run our PDF muncher, and it will consume the Dungeons and Dragons monster manual pdf in our pfds folder. 
+![Step 6](data/pdf-muncher.png)
+
+Finally, we can see our vectorized training data contains the DnD content aswell!
+![Step 7](data/pdf-6.png)
+
+Now we simply run vectorizor and our Pinecone DB will get updated.
 
 1. Clone the repository and navigate to the project directory.
 2. Install the required Python libraries using `pip install -r requirements.txt`.
